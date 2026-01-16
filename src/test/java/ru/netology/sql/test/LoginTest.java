@@ -10,7 +10,6 @@ import ru.netology.sql.page.DashboardPage;
 import ru.netology.sql.page.LoginPage;
 
 
-
 public class LoginTest {
 
     private LoginPage loginPage;
@@ -31,9 +30,9 @@ public class LoginTest {
     @Test
     void shouldSuccessLogin() {
         var info = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(info); // авторизуюсь и перехожу на страницу верификации
-        var verificationCode = SQLHelper.getVerificationCode(); //получаю код верификации
-       verificationPage.validVerify(verificationCode); // ввожу код верификации и перехожу на страницу дашборда
+        var verificationPage = loginPage.validLogin(info);
+        var verificationCode = SQLHelper.getVerificationCode();
+        verificationPage.validVerify(verificationCode);
         DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.checkHeading();
     }
@@ -41,9 +40,9 @@ public class LoginTest {
     @Test
     void shouldFailedLoginByInvalidPassword() {
         var info = DataHelper.getAuthInfo();
-        loginPage.invalidLogin(info, "en"); // первый раз авторизуюсь с неверным паролем
-        loginPage.invalidLogin(info, "en"); // второй раз авторизуюсь с неверным паролем
-        loginPage.invalidLogin(info, "en"); // третий раз авторизуюсь с неверным паролем
+        loginPage.invalidLogin(info, "en");
+        loginPage.invalidLogin(info, "en");
+        loginPage.invalidLogin(info, "en");
         loginPage.checkErrorMessage("Система заблокирована");
     }
 }
