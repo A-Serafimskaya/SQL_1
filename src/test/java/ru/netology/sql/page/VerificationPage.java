@@ -2,6 +2,8 @@ package ru.netology.sql.page;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -12,7 +14,7 @@ public class VerificationPage {
     private final SelenideElement errorMessage = $(".notification__content");
 
     public void verifyIsVerificationPage() {
-        verifyCode.shouldBe(visible);
+        verifyCode.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void validVerify(String verifyCodeValue) {

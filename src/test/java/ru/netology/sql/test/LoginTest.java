@@ -9,6 +9,10 @@ import ru.netology.sql.data.SQLHelper;
 import ru.netology.sql.page.DashboardPage;
 import ru.netology.sql.page.LoginPage;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
+
 
 public class LoginTest {
 
@@ -31,6 +35,7 @@ public class LoginTest {
     void shouldSuccessLogin() {
         var info = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(info);
+        verificationPage.verifyIsVerificationPage();
         var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
         DashboardPage dashboardPage = new DashboardPage();
